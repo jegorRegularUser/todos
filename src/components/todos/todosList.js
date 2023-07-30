@@ -21,9 +21,7 @@ const TodosList = (props) => {
   const listData = props.listData.map((elementList) => {
     return (
       <div
-        className={
-          isAllCompleted ? styles.completed : styles.nav
-        } /*сейчас стоит просто на все элементы, не знаю как нормально сделать */
+        className={isAllCompleted ? styles.completed : styles.nav} //need to change
         key={elementList.id}
       >
         <div className={styles.inline}>

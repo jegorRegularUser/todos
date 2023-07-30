@@ -34,7 +34,7 @@ function App() {
         prevList.findIndex((obj) => obj.id === Number(id)),
         1
       );
-      // setCompleted(state);                                   // не знаю как имплемитировать
+      // setCompleted(state);
       object.isCompleted = state;
       return [object, ...prevList].sort(function compareNumbers(a, b) {
         return b.id - a.id;
@@ -51,7 +51,7 @@ function App() {
         onCheckCompleted={checkCompletedHandler}
         onDeleteAll={deleteAllTodosElementHandler}
         onDelete={deleteTodosElementHandler}
-        // isCompleted={isCompleted}
+        // isCompleted={isCompleted} //need to change
         listData={todosList}
       />
 
