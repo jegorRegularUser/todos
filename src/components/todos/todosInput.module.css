@@ -1,0 +1,27 @@
+.input {
+  font-size: 120%;
+  width: 80%;
+  border: 0px;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+}
+.invalid-input {
+  font-size: 120%;
+  width: 60%;
+  border: 5%;
+  border-color: rgb(255, 0, 0);
+  border-radius: 15px;
+  background-color: rgba(255, 94, 94, 0.7);
+}
+.nav {
+  display: flex;
+}
+
+.nav button {
+  width: 50%;
+  position: relative;
+  margin-left: 15px;
+  border-radius: 15px;
+  border: 0px;
+  background-color: rgb(121, 174, 252);
+}

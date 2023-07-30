@@ -1,24 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
-
+import TodosInput from "./components/todos/todosInput";
+import TodosList from "./components/todos/todosList";
+import React, { useState } from "react";
 function App() {
+  // const [isCompleted, setCompleted] = useState(false);
+  const [todosList, setTodosList] = useState([
+    {
+      text: "learn react",
+      id: 1,
+      isCompleted: false,
+    },
+  ]);
+  // console.log(todosList);
+  const createNewElementHandler = (text) => {
+    setTodosList((prevList) => [
+      { text: text, id: prevList.slice(0)[0]?.id + 1 || 1, isCompleted: false }, //Math.random(1).toString()
+      ...prevList,
+    ]);
+  };
+
+  const deleteTodosElementHandler = (todosId) => {
+    setTodosList((prevList) => {
+      return prevList.filter((todos) => todos.id !== Number(todosId));
+    });
+  };
+  const deleteAllTodosElementHandler = () => {
+    setTodosList([]);
+  };
+
+  const checkCompletedHandler = (state, id) => {
+    setTodosList((prevList) => {
+      const object = prevList.find((obj) => obj.id === Number(id));
+      prevList.splice(
+        prevList.findIndex((obj) => obj.id === Number(id)),
+        1
+      );
+      // setCompleted(state);                                   // не знаю как имплемитировать
+      object.isCompleted = state;
+      return [object, ...prevList].sort(function compareNumbers(a, b) {
+        return b.id - a.id;
+      });
+    });
+  };
+  const commentAboutEmptyTodos =
+    todosList.length > 0 ? "" : "Todos not here now";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <TodosInput onEnter={createNewElementHandler} listData={todosList} />
+      <TodosList
+        onCheckCompleted={checkCompletedHandler}
+        onDeleteAll={deleteAllTodosElementHandler}
+        onDelete={deleteTodosElementHandler}
+        // isCompleted={isCompleted}
+        listData={todosList}
+      />
+
+      <h3 style={{ color: "#86bae8", textAlign: "center" }}>
+        {commentAboutEmptyTodos}
+      </h3>
+    </React.Fragment>
   );
 }
 
