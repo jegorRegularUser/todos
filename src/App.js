@@ -1,6 +1,7 @@
 import TodosInput from "./components/todos/todosInput";
 import TodosList from "./components/todos/todosList";
 import React, { useState } from "react";
+import "./index.css";
 function App() {
   // const [isCompleted, setCompleted] = useState(false);
   const [todosList, setTodosList] = useState([
@@ -42,10 +43,11 @@ function App() {
     });
   };
   const commentAboutEmptyTodos =
-    todosList.length > 0 ? "" : "Todos not here now";
+    todosList.length > 0 ? "" : "There aren't any todos yet!";
 
   return (
     <React.Fragment>
+      <div className="title">todos</div>
       <TodosInput onEnter={createNewElementHandler} listData={todosList} />
       <TodosList
         onCheckCompleted={checkCompletedHandler}
@@ -55,9 +57,9 @@ function App() {
         listData={todosList}
       />
 
-      <h3 style={{ color: "#86bae8", textAlign: "center" }}>
+      <div className="sub-title">
         {commentAboutEmptyTodos}
-      </h3>
+      </div>
     </React.Fragment>
   );
 }

@@ -1,5 +1,17 @@
+:root{
+  --light-blue: rgb(136, 173, 206);
+  --blue: rgb(134, 186, 232);
+  --blue-title: rgb(190, 223, 255);
+  --invalid-light-red: rgba(255, 94, 94, 0.7);
+  --invalid-red: rgba(251, 43, 43, 0.7);
+}
+@media(max-width: 500px){
+:root{
+  font-size: 10px;
+}
+}
 body {
-  background-color: rgb(136, 173, 206);
+  background-color: var(--light-blue);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -7,11 +19,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-h2 {
+
+.title {
+  margin-bottom: 2%;
+  font-size: 5rem;
   text-align: center;
-  font-size: 300%;
-  color: #86bae8;
+  color: var(--blue-title);
+  text-transform: uppercase;
 }
+.sub-title{
+  margin-bottom: 2%;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--blue-title);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

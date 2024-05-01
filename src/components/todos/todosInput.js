@@ -9,7 +9,7 @@ const TodosInput = (props) => {
   const inputValue = useRef();
 
   const setInvalidMessageAndView = () => {
-    setMessageInInput("todos includes at least 1 letter");
+    setMessageInInput("Todos should includes at least 1 letter");
     setInvalid(true);
   };
 
@@ -63,18 +63,16 @@ const TodosInput = (props) => {
   };
 
   return (
-    <Card>
-      <div className={styles.nav}>
+      <div className={styles['input-wrapper']}>
         <input
           ref={inputValue}
           placeholder={messageInInput}
           onKeyDown={createNewElementHandler}
           onChange={checkInvalidHandler}
-          className={invalid ? styles["invalid-input"] : styles.input}
+          className={invalid ? styles["invalid-input"] : ''}
         />
-        <button onClick={createNewElementFromButtonHandler}>pin</button>
+        <button className={invalid ? styles["invalid-button"] : ''} onClick={createNewElementFromButtonHandler}>add</button>
       </div>
-    </Card>
   );
 };
 

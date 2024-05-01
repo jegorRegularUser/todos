@@ -1,12 +1,8 @@
 .card {
+  width: 55%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  background-color: rgb(134, 186, 232);
-  text-align: center;
-  width: 50%;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  margin-top: 1%;
+  background-color: var(--blue);
+  margin-left: 22.5%;
+  margin-right: 22.5%;
 }

@@ -21,7 +21,7 @@ const TodosList = (props) => {
   const listData = props.listData.map((elementList) => {
     return (
       <div
-        className={isAllCompleted ? styles.completed : styles.nav} //need to change
+        className={ styles['todos-wrapper']} // isAllCompleted ? styles.completed : need to change!!!!!!!!!!!!!!!!!
         key={elementList.id}
       >
         <div className={styles.inline}>
@@ -48,15 +48,16 @@ const TodosList = (props) => {
 
   return (
     <>
-      {" "}
-      <div className={styles.nav}>
-        <div className={styles.inline}>
-          <button onClick={deleteAllElements}>delete all</button>
-          <button style={{ color: "#FF0000" }}>delete all completed</button>
-          <button onClick={checkBoxChangeAllHandler}>make all completed</button>
+      
+      <div className={styles.wrapper}>
+        {listData}
+        
+      <div className={styles.inline}>
+          <button onClick={deleteAllElements}>Delete all</button>
+          <button style={{ color: "var(--invalid-red)" }}>Delete all completed</button>
+          <button onClick={checkBoxChangeAllHandler}>Make all completed</button>
         </div>
       </div>
-      <ul className={styles.list}>{listData}</ul>
     </>
   );
 };
