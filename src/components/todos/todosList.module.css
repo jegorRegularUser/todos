@@ -1,18 +1,18 @@
 .wrapper {
-  min-height: 30vh;
+ 
   padding: 1%;
   gap: 20px;
   display: flex;
   flex-direction: column;
-  background-color: var(--blue);
-  width: 40rem;
-  margin-left: calc(50% - 20rem);
-  margin-right: calc(50% - 2rem);
+  background-color: var(--light-blue);
+  width: 38rem;
+  margin-left: calc(50% - 19rem);
   margin-top: 5%;
   list-style-type: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
+
 .completed {
   color: rgb(152, 152, 152);
   background-color: rgb(142, 178, 210);
@@ -24,7 +24,8 @@
   margin: 0 auto;
   margin-top: 1%;
   border-radius: 15px;
-   & li {
+
+  & li {
     text-decoration: line-through;
   }
 }
@@ -34,18 +35,71 @@
   border-bottom: 1px solid gray;
 }
 
-.inline {
+.todo-wrapper {
   display: flex;
-  justify-content: center;
-  text-align: center;
+  padding-bottom: 1%;
+  align-items: center;
+  gap: 10px;
+
+  & input {
+    display: none;
+    
+  }
+
+  label {
+    height: 1.2rem;
+    width: 1.2rem;
+    
+    border: 1px solid var(--blue-title);
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    
+  }
+
+  input[type="checkbox"]:checked +  label {
+    background-image: url('../../../public/tick.png');
+    transform:rotate(360deg);
+  }
+
+
+
+  & span {
+    color: var(--blue-title);
+    font-size: 1.2rem;
+    text-align: left;
+    flex-grow: 8;
+  }
+
   & button {
+    color: var(--blue-title);
+    font-size: 1.2rem;
+    flex-basis: min-content;
     text-decoration: none;
     margin-left: 15px;
-    border-radius: 15px;
-    border: 0px;
-    background-color: rgb(121, 174, 252);
+    border-radius: 10px;
+    border: none;
+    background-color: var(--blue);
   }
 }
 
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 5px;
 
-
+  & button {
+    color: var(--blue-title);
+    font-size: 1.2rem;
+    flex-grow: 3;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--blue);
+  }
+}

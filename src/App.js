@@ -21,7 +21,7 @@ function App() {
 
   const deleteTodosElementHandler = (todosId) => {
     setTodosList((prevList) => {
-      return prevList.filter((todos) => todos.id !== Number(todosId));
+      return prevList.filter((todos) => todos.id !== +todosId);
     });
   };
   const deleteAllTodosElementHandler = () => {
@@ -29,38 +29,36 @@ function App() {
   };
 
   const checkCompletedHandler = (state, id) => {
+    
     setTodosList((prevList) => {
-      const object = prevList.find((obj) => obj.id === Number(id));
+      const obj = prevList.find((obj) => obj.id === +id);
       prevList.splice(
-        prevList.findIndex((obj) => obj.id === Number(id)),
+        prevList.findIndex((obj) => obj.id === +id),
         1
       );
-      // setCompleted(state);
-      object.isCompleted = state;
-      return [object, ...prevList].sort(function compareNumbers(a, b) {
+      obj.isCompleted = state;
+
+      return [obj, ...prevList].sort(function compareNumbers(a, b) {
         return b.id - a.id;
       });
     });
   };
   const commentAboutEmptyTodos =
-    todosList.length > 0 ? "" : "There aren't any todos yet!";
+    todosList.length ? "" : "There aren't any todos yet!";
 
   return (
-    <React.Fragment>
+    <>
       <div className="title">todos</div>
       <TodosInput onEnter={createNewElementHandler} listData={todosList} />
-      <TodosList
-        onCheckCompleted={checkCompletedHandler}
+<TodosList onCheckCompleted={checkCompletedHandler}
         onDeleteAll={deleteAllTodosElementHandler}
         onDelete={deleteTodosElementHandler}
         // isCompleted={isCompleted} //need to change
-        listData={todosList}
-      />
-
-      <div className="sub-title">
+        listData={todosList}> <div className="sub-title">
         {commentAboutEmptyTodos}
-      </div>
-    </React.Fragment>
+      </div></TodosList>
+     
+    </>
   );
 }
 

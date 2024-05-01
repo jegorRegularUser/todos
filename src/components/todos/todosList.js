@@ -24,16 +24,16 @@ const TodosList = (props) => {
         className={ styles['todos-wrapper']} // isAllCompleted ? styles.completed : need to change!!!!!!!!!!!!!!!!!
         key={elementList.id}
       >
-        <div className={styles.inline}>
+        <div className={styles['todo-wrapper']}>
           <input
-            id={elementList.id}
+          id={elementList.id}
             onChange={checkBoxChangeHandler}
             type='checkbox'
           ></input>
+          <label htmlFor={elementList.id} className={styles['custom-cb']}></label>
+          <span > {elementList.text}</span>
 
-          <li id={elementList.id}> {elementList.text}</li>
-
-          <button id={elementList.id} onClick={deleteTodosHandler}>
+          <button onClick={deleteTodosHandler} id={elementList.id}>
             delete
           </button>
         </div>
@@ -51,8 +51,8 @@ const TodosList = (props) => {
       
       <div className={styles.wrapper}>
         {listData}
-        
-      <div className={styles.inline}>
+        {props.children}
+      <div className={ styles['btn-wrapper'] }>
           <button onClick={deleteAllElements}>Delete all</button>
           <button style={{ color: "var(--invalid-red)" }}>Delete all completed</button>
           <button onClick={checkBoxChangeAllHandler}>Make all completed</button>
