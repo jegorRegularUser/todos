@@ -1,9 +1,9 @@
 import TodosInput from "./components/todos/todosInput";
 import TodosList from "./components/todos/todosList";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 function App() {
-  // const [isCompleted, setCompleted] = useState(false);
+  const [currentList, setCurrentList] = useState('AllTodos')
   const [todosList, setTodosList] = useState([
     {
       text: "learn react",
@@ -11,26 +11,33 @@ function App() {
       isCompleted: false,
     },
   ]);
-  // console.log(todosList);
   const createNewElementHandler = (text) => {
     setTodosList((prevList) => [
-      { text: text, id: prevList.slice(0)[0]?.id + 1 || 1, isCompleted: false }, //Math.random(1).toString()
+      { text: text, id: prevList.slice(0)[0]?.id + 1 || 1, isCompleted: false }, //.toString()
       ...prevList,
     ]);
+    setIsAllTodosCompleted(false);
   };
 
   const deleteTodosElementHandler = (todosId) => {
     setTodosList((prevList) => {
+      if (prevList.some((todos) => todos.isCompleted === false && todos.id !== +todosId)
+    ) {
+      setIsAllTodosCompleted(false)
+    } else {
+      setIsAllTodosCompleted(true)
+    }
       return prevList.filter((todos) => todos.id !== +todosId);
     });
   };
-  const deleteAllTodosElementHandler = () => {
+  const deleteAllTodosHandler = () => {
     setTodosList([]);
+    setIsAllTodosCompleted(false);
   };
 
   const checkCompletedHandler = (state, id) => {
-    
     setTodosList((prevList) => {
+      
       const obj = prevList.find((obj) => obj.id === +id);
       prevList.splice(
         prevList.findIndex((obj) => obj.id === +id),
@@ -38,26 +45,61 @@ function App() {
       );
       obj.isCompleted = state;
 
+      if ([obj, ...prevList].some((todos) => todos.isCompleted === false)
+    ) {
+      setIsAllTodosCompleted(false)
+    } else {
+      setIsAllTodosCompleted(true)
+    }
       return [obj, ...prevList].sort(function compareNumbers(a, b) {
         return b.id - a.id;
       });
     });
+    
   };
-  const commentAboutEmptyTodos =
-    todosList.length ? "" : "There aren't any todos yet!";
 
+  const [isAllTodosCompleted, setIsAllTodosCompleted] = useState(false);
+  const makeAllTodosCompletedHandler = () => {
+    setTodosList((prevList) => {
+      if (prevList.every((todos) => todos.isCompleted === true)
+      ) {
+        setIsAllTodosCompleted(false);
+        return prevList.map((todos) => { todos.isCompleted = false; return todos });
+      }
+      setIsAllTodosCompleted(true)
+      return prevList.map((todos) => { todos.isCompleted = true; return todos });
+      // return prevList.every((todos) => todos.isCompleted === true ) ?  prevList.map((todos) => { todos.isCompleted = false; return todos }) :
+      //  prevList.map((todos) => { todos.isCompleted = true; return todos });
+    });
+  }
+  const deleteAllCompletedTodosHandler = () => {
+    setTodosList((prevList) => {
+      return prevList.filter((todos) => todos.isCompleted === false);
+    });
+    setIsAllTodosCompleted(false);
+  };
+
+  const changeListHandler=(id)=>{
+    setCurrentList(id)
+  }
   return (
     <>
       <div className="title">todos</div>
       <TodosInput onEnter={createNewElementHandler} listData={todosList} />
-<TodosList onCheckCompleted={checkCompletedHandler}
-        onDeleteAll={deleteAllTodosElementHandler}
+      <TodosList onCheckCompleted={checkCompletedHandler}
+        onDeleteAll={deleteAllTodosHandler}
         onDelete={deleteTodosElementHandler}
-        // isCompleted={isCompleted} //need to change
-        listData={todosList}> <div className="sub-title">
-        {commentAboutEmptyTodos}
-      </div></TodosList>
-     
+        onMakeAllTodosCompleted={makeAllTodosCompletedHandler}
+        onDeleteAllCompletedTodos={deleteAllCompletedTodosHandler}
+        onChangeList={changeListHandler}
+        currentList={currentList}
+        listData={todosList}
+        isATC={isAllTodosCompleted}>
+        <div className="sub-title">
+          {todosList.length ? "" : "There aren't any todos yet!"}
+        </div>
+      </TodosList>
+
     </>
   );
 }

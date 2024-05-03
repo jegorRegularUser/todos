@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import Card from "../UI/Card";
 import styles from "./todosInput.module.css";
 const TodosInput = (props) => {
   const [messageInInput, setMessageInInput] = useState(

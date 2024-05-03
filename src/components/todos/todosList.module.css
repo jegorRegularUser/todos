@@ -1,5 +1,5 @@
 .wrapper {
- 
+
   padding: 1%;
   gap: 20px;
   display: flex;
@@ -7,49 +7,72 @@
   background-color: var(--light-blue);
   width: 38rem;
   margin-left: calc(50% - 19rem);
-  margin-top: 5%;
+
   list-style-type: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  
+  
 }
+.nodisplay{
+  display: none;
+}
+.categories-btns {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-around;
+  width: 38rem;
+  margin-left: calc(50% - 19rem);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  background-color: var(--light-blue);
+  overflow: hidden;
+  
 
-.completed {
-  color: rgb(152, 152, 152);
-  background-color: rgb(142, 178, 210);
-  text-align: center;
-  width: 50%;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  margin-top: 1%;
-  border-radius: 15px;
+  & button {
+    flex-grow: 3.3;
+    color: var(--blue-title);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    background-color: var(--light-blue);
+  }
 
-  & li {
-    text-decoration: line-through;
+  & .unactive {
+    background-color: var(--dark-blue);
   }
 }
 
 .todos-wrapper {
-  text-align: center;
-  border-bottom: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  & .completed{
+    border-bottom: 1px solid gray;
+  }
 }
 
 .todo-wrapper {
+  text-align: center;
+  border-bottom: 1px solid var(--blue-title);
   display: flex;
   padding-bottom: 1%;
   align-items: center;
   gap: 10px;
+  transition: all 0.3s ease-in-out;
 
   & input {
     display: none;
-    
+
   }
 
   label {
-    height: 1.2rem;
-    width: 1.2rem;
-    
+    min-height: 1.2rem;
+    min-width: 1.2rem;
     border: 1px solid var(--blue-title);
     border-radius: 50%;
     cursor: pointer;
@@ -58,21 +81,30 @@
     background-repeat: no-repeat;
     background-position: center;
     transition: all 0.3s ease-in-out;
-    
   }
 
-  input[type="checkbox"]:checked +  label {
+
+
+  input[type="checkbox"]:checked+label {
     background-image: url('../../../public/tick.png');
-    transform:rotate(360deg);
+    transform: rotate(360deg);
   }
 
 
 
   & span {
+    word-break: break-all;
     color: var(--blue-title);
     font-size: 1.2rem;
     text-align: left;
     flex-grow: 8;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .completed {
+    color: rgb(152, 152, 152);
+    text-decoration: line-through;
+    border-bottom: none;
   }
 
   & button {
@@ -86,6 +118,7 @@
     background-color: var(--blue);
   }
 }
+
 
 .btn-wrapper {
   display: flex;
